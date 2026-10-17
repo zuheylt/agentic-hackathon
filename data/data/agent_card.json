@@ -1,0 +1,14 @@
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "name": "CouncilTrade AI Agent",
+  "description": "Multi-agent AI Council decision execution module on Avalanche C-Chain",
+  "services": [
+    {
+      "name": "A2A",
+      "endpoint": "https://api.counciltrade.ai/v1/agent"
+    }
+  ],
+  "active": true,
+  "standard": "ERC-8004",
+  "capabilities": ["multi-agent-consensus", "risk-control", "on-chain-execution"]
+}

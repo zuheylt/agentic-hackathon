@@ -1,0 +1,15 @@
+{
+    "proposal": {
+        "action": "BUY",
+        "token": "AVAX",
+        "amount_usd": 3.5,
+        "rationale": "Bullish trend confirmed on Avalanche C-Chain."
+    },
+    "execution": {
+        "tx_hash": "0x317f147c83b27316025185ed279e5abab50812b49a247ebe60ce00587a9ac3a0",
+        "snowtrace_url": "https://snowtrace.io/tx/0x317f147c83b27316025185ed279e5abab50812b49a247ebe60ce00587a9ac3a0",
+        "execution_timestamp": "2026-10-17 12:07:02",
+        "block_finality": "1.2s (Simulated)",
+        "gas_fee": "0.0012 AVAX"
+    }
+}
