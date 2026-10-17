@@ -167,7 +167,7 @@ if page == "🏠 Dashboard":
 
     # ── Run controls ──────────────────────────────────────────────────────────
     if "inst_id_input" not in st.session_state:
-        st.session_state["inst_id_input"] = "ETH-USDT"
+        st.session_state["inst_id_input"] = "AVAX-USDT"
 
     col_inst, col_mode, col_btn = st.columns([2, 1, 1])
     with col_inst:
