@@ -81,7 +81,7 @@ def _record_sync(action: str, token: str, amount_usd: float, rationale: str) -> 
     signed  = w3.eth.account.sign_transaction(tx, _PRIVATE_KEY)
     tx_hash = w3.eth.send_raw_transaction(signed.raw_transaction)
     w3.eth.wait_for_transaction_receipt(tx_hash, timeout=30)
-    tx_hex = tx_hash.hex()
+    tx_hex = "0x" + tx_hash.hex()
     print(f"  [Avalanche] Recorded on-chain: {_EXPLORER}/tx/{tx_hex}")
     return {"tx_hash": tx_hex, "explorer_url": f"{_EXPLORER}/tx/{tx_hex}"}
 
