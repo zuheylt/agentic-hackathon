@@ -466,27 +466,23 @@ elif page == "💼 Portfolio":
 
         cols = st.columns(3)
         for i, h in enumerate(holdings):
-            ccy       = h.get("ccy", "?")
-            eq        = float(h.get("eq") or 0)
-            avail     = float(h.get("availBal") or 0)
-            eq_usd    = float(h.get("eqUsd") or 0)
-            upl       = float(h.get("spotUpl") or 0)
-            upl_pct   = float(h.get("spotUplRatio") or 0) * 100
-            avg_px    = float(h.get("openAvgPx") or 0)
-            pct_port  = (eq_usd / total_usd * 100) if total_usd > 0 else 0
-            bar       = "█" * int(pct_port / 5) + "░" * (20 - int(pct_port / 5))
-            upl_color = "#3fb950" if upl >= 0 else "#f85149"
+            ccy      = h.get("ccy", "?")
+            eq       = float(h.get("eq") or 0)
+            avail    = float(h.get("availBal") or 0)
+            eq_usd   = float(h.get("eqUsd") or 0)
+            upl      = float(h.get("spotUpl") or 0)
+            upl_pct  = float(h.get("spotUplRatio") or 0) * 100
+            avg_px   = float(h.get("openAvgPx") or 0)
+            pct_port = (eq_usd / total_usd * 100) if total_usd > 0 else 0
 
             with cols[i % 3]:
-                st.markdown(f"""<div class="net-card">
-                    <h4>{ccy}</h4>
-                    <p><strong>Balance:</strong> {eq:,.6g}
-                       &nbsp;·&nbsp; <strong>≈ ${eq_usd:,.2f}</strong></p>
-                    <p><strong>Available:</strong> {avail:,.6g}</p>
-                    {f'<p><strong>Avg buy:</strong> ${avg_px:,.4f}</p>' if avg_px > 0 else ''}
-                    {f'<p><strong>P&amp;L:</strong> <span style="color:{upl_color};">{upl:+.4f} ({upl_pct:+.2f}%)</span></p>' if upl != 0 else ''}
-                    <p style="color:#8b949e;font-size:11px;">{bar} {pct_port:.1f}% of portfolio</p>
-                </div>""", unsafe_allow_html=True)
+                delta = f"{upl:+.4f} ({upl_pct:+.2f}%)" if upl != 0 else None
+                st.metric(label=ccy, value=f"${eq_usd:,.2f}", delta=delta)
+                st.caption(f"Balance: {eq:,.6g}  ·  Available: {avail:,.6g}")
+                if avg_px > 0:
+                    st.caption(f"Avg buy: ${avg_px:,.4f}")
+                st.progress(min(pct_port / 100, 1.0), text=f"{pct_port:.1f}% of portfolio")
+                st.divider()
 
         st.divider()
         st.subheader("💡 What does this mean?")
