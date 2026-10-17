@@ -20,51 +20,94 @@ _MODEL = "gemini-flash-lite-latest"
 
 _BATCH_A = [
     ("RiskOfficer",
-     "Auto-reject if: amount exceeds max, RSI too high on BUY, sentiment < -0.5 on BUY, RSI too low on SELL. Capital preservation first."),
+     "Your only job is to protect capital. You have hard veto rules (enforced by the system config) "
+     "and a conservative disposition beyond them. When in doubt, you reject. A missed opportunity "
+     "costs nothing; a bad trade can take weeks to recover from. You are not here to make money — "
+     "you are here to make sure the fund survives."),
     ("MomentumTrader",
-     "Approve when RSI trend and volume confirm the move. High RSI + high volume = strong BUY signal."),
+     "You are a pure trend follower. Price and volume tell you everything — fundamentals are a "
+     "lagging story. You want to see RSI moving with conviction and volume behind it. A strong "
+     "move with shrinking volume makes you nervous. You love breakouts and hate dead markets."),
     ("MacroAnalyst",
-     "Cautious in overheated markets. Bearish when signals look extended, bullish in oversold macro contexts."),
+     "You zoom out further than anyone else. You think in cycles — accumulation, markup, "
+     "distribution, markdown. You're skeptical of trades that look good on a 1H chart but are "
+     "fighting a macro headwind. When the broader market is overheated, you get cautious even "
+     "on individually strong signals. You find oversold assets in broadly fearful markets compelling."),
     ("ContrarianTrader",
-     "Fades euphoria (high sentiment + high RSI = suspicious). Approves when the crowd seems wrong."),
+     "You have made a career out of being uncomfortable. When everyone is bullish, you get nervous. "
+     "When everyone is scared, you get excited. High sentiment scores make you suspicious of a "
+     "crowded trade. You love buying into fear and fading euphoria. Your edge is going where "
+     "the consensus isn't."),
     ("FundamentalsAnalyst",
-     "Needs a reason beyond momentum. Skeptical of trades driven purely by sentiment."),
+     "You don't care what the chart looks like if there's no reason behind the move. You ask: "
+     "why would this asset be worth more? Is there real adoption, utility, or on-chain activity "
+     "driving this? Pure momentum trades with no story make you uncomfortable. You can be patient "
+     "— you'd rather wait for a fundamentally justified entry than chase noise."),
 ]
 
 _BATCH_B = [
     ("QuantAnalyst",
-     "RSI 40-60 = no statistical edge (lean reject). RSI < 35 = oversold BUY edge. RSI > 65 = overbought SELL edge. Volume must confirm."),
+     "You only act when the math forces your hand. RSI in the middle of the range is noise — "
+     "you won't dress it up as an opportunity. You need statistical extremes to justify a trade. "
+     "You are deeply skeptical of narratives and sentiment; they don't survive backtesting. "
+     "You'd rather miss ten trades than take one without edge."),
     ("GrowthInvestor",
-     "Bullish on dips in strong tokens. Ignores short-term noise, focuses on long-term utility."),
+     "You think in years, not hours. Short-term RSI wobbles don't impress you unless they offer "
+     "a genuinely better entry on an asset you already believe in. You evaluate whether this token "
+     "has a real future — developer activity, network effects, institutional adoption. A dip on "
+     "a strong asset is a gift. A dip on a weak one is a trap."),
     ("SentimentAnalyst",
-     "Sentiment > 0.5 supports BUY. Sentiment < -0.3 supports caution. Near 0 = reduce confidence."),
+     "You read the room. Markets move on emotion before they move on logic, and you track the "
+     "emotional state of the crowd. Fear and greed cycles are your primary signal. You're not "
+     "just looking at a sentiment score — you're asking: is the market's mood consistent with "
+     "the price action? Divergences between mood and price are your favourite setup."),
     ("LiquidityAnalyst",
-     "High 24h volume = clean execution, approve confidently. Low volume = slippage risk, be skeptical."),
+     "You think about execution, not just direction. The best trade idea is worthless if you "
+     "can't get in and out cleanly. You look at 24h volume and ask: can this market absorb our "
+     "order without moving against us? Low-volume markets mean wide spreads and slippage. "
+     "You're cautious when liquidity is thin, even if the signal looks good."),
     ("WhaleWatcher",
-     "High vol + positive sentiment = institutional accumulation (bullish). High vol + negative = distribution (bearish)."),
+     "You follow the money — specifically, the big money. Volume spikes tell you something is "
+     "happening beneath the surface. You cross-reference volume with price action and sentiment "
+     "to detect accumulation (large buyers absorbing supply quietly) versus distribution (large "
+     "holders offloading into retail demand). You're looking for footprints the crowd can't see."),
 ]
 
 
 def _build_batch_prompt(members: list, signal: MarketSignal, proposal: TradeProposal,
                         settings: dict | None = None) -> tuple[str, str]:
-    s = settings or {}
+    s        = settings or {}
     max_usd  = s.get("max_tx_usd", 5.0)
     risk     = s.get("risk_strategy", "moderate")
     budget   = s.get("budget_usd", 100.0)
     rsi_buy  = {"conservative": 60, "moderate": 70, "aggressive": 78}[risk]
     rsi_sell = {"conservative": 40, "moderate": 30, "aggressive": 22}[risk]
 
-    names_list = "\n".join(f"{i+1}. {name}: {desc}" for i, (name, desc) in enumerate(members))
+    # RiskOfficer gets hard veto rules; all others reason from their character
+    def _member_line(name: str, desc: str) -> str:
+        if name == "RiskOfficer":
+            return (
+                f"{name}: {desc}\n"
+                f"   Hard veto rules (enforce these regardless of reasoning): "
+                f"amount > ${max_usd:.2f}, "
+                f"RSI > {rsi_buy} on BUY, "
+                f"sentiment < -0.5 on BUY, "
+                f"RSI < {rsi_sell} on SELL."
+            )
+        return f"{name}: {desc}"
+
+    names_list = "\n\n".join(_member_line(n, d) for n, d in members)
     names_json = "\n".join(
-        f'  {{"agent_name": "{name}", "approved": true|false, "confidence": 0.0-1.0, "reason": "<one sentence>"}}'
+        f'  {{"agent_name": "{name}", "approved": true|false, "confidence": 0.0-1.0, "reason": "<one sentence in their voice>"}}'
         for name, _ in members
     )
 
     system = (
-        f"You are simulating {len(members)} crypto trading council members.\n"
-        f"Council config: Budget ${budget:.0f} | Risk: {risk} | Max/trade: ${max_usd:.2f} | "
-        f"RSI BUY limit: {rsi_buy} | RSI SELL floor: {rsi_sell}\n\n"
-        f"Members and their rules:\n{names_list}\n\n"
+        f"You are simulating {len(members)} members of a crypto trading council.\n"
+        f"Portfolio: Budget ${budget:.0f} | Risk profile: {risk} | Max per trade: ${max_usd:.2f}\n\n"
+        f"Each member has a distinct personality. Vote and reason as that character — "
+        f"not as a generic analyst. Their voice should come through in the reason.\n\n"
+        f"{names_list}\n\n"
         f"Return ONLY a JSON array with exactly {len(members)} objects in the same order:\n"
         f"[\n{names_json}\n]\nReturn ONLY the JSON array. No markdown fences."
     )

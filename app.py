@@ -158,7 +158,7 @@ if page == "🏠 Dashboard":
                 row[4].markdown(vol_str)
                 row[5].markdown(f"<span style='color:{action_color};'>{score_bar}</span>", unsafe_allow_html=True)
                 if row[6].button(f"Run on {r['token']}", key=f"scan_run_{i}"):
-                    st.session_state["selected_inst_id"] = r["inst_id"]
+                    st.session_state["inst_id_input"] = r["inst_id"]
                     st.rerun()
 
             st.caption("Score = RSI deviation from neutral (70%) + volume rank (30%). Higher = stronger signal.")
@@ -166,10 +166,12 @@ if page == "🏠 Dashboard":
     st.divider()
 
     # ── Run controls ──────────────────────────────────────────────────────────
+    if "inst_id_input" not in st.session_state:
+        st.session_state["inst_id_input"] = "ETH-USDT"
+
     col_inst, col_mode, col_btn = st.columns([2, 1, 1])
     with col_inst:
-        default_inst = st.session_state.pop("selected_inst_id", "ETH-USDT")
-        inst_id = st.text_input("Token pair", value=default_inst,
+        inst_id = st.text_input("Token pair", key="inst_id_input",
                                 help="Any OKX spot pair, e.g. BTC-USDT, SOL-USDT").upper().strip()
     with col_mode:
         use_mock = st.checkbox("Use mock data", value=False,
@@ -209,8 +211,8 @@ if page == "🏠 Dashboard":
 
     # Status bar
     status = data.get("status", "—")
-    status_color = {"EXECUTED": "#3fb950", "REJECTED": "#f85149",
-                    "PENDING_EXECUTION": "#d29922"}.get(status, "#c9d1d9")
+    status_color = {"EXECUTED": "#3fb950", "FORCE_EXECUTED": "#e06c00",
+                    "REJECTED": "#f85149", "PENDING_EXECUTION": "#d29922"}.get(status, "#c9d1d9")
     st.markdown(
         f'<span style="color:{status_color}; font-size:18px; font-weight:bold;">● {status}</span>'
         f' &nbsp;·&nbsp; <span style="color:#8b949e;">{data.get("timestamp", "—")}</span>',
@@ -229,6 +231,30 @@ if page == "🏠 Dashboard":
                 except Exception as e:
                     st.error(f"Execution error: {e}")
             st.rerun()
+
+    # Force override (council rejected but user wants to execute anyway)
+    if status == "REJECTED":
+        prop = data.get("proposal", {})
+        with st.expander("⚡ Override Council Decision"):
+            st.error(
+                f"The council rejected this trade ({data['council'].get('approved_count', '?')}/{data['council'].get('total_count', 10)} votes). "
+                "Forcing it will execute regardless of the AI's recommendation."
+            )
+            st.markdown(
+                f"**Proposal:** {prop.get('action')} {prop.get('token')} · "
+                f"${prop.get('amount_usd')} · *{prop.get('rationale')}*"
+            )
+            col_warn, col_btn = st.columns([3, 1])
+            col_warn.warning("You are overriding 10 AI agents. This action is logged.")
+            if col_btn.button("🔴 Force Execute", type="primary"):
+                with st.spinner("Forcing order to OKX…"):
+                    try:
+                        from src.execution.executor import force_execute_from_ui
+                        data = run_async(force_execute_from_ui(demo=True))
+                        st.success(f"Force executed! Order ID: {data['execution']['order_id']}")
+                    except Exception as e:
+                        st.error(f"Execution error: {e}")
+                st.rerun()
 
     st.divider()
     st.subheader("🌐 Market Signal")
@@ -415,7 +441,7 @@ elif page == "⚙️ Setup":
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "💼 Portfolio":
     st.title("💼 Portfolio")
-    st.caption("Your OKX demo account holdings, pulled live from the exchange.")
+    st.caption("Your OKX demo account holdings, pulled live via ATK.")
 
     if st.button("🔄 Refresh"):
         st.rerun()
@@ -423,34 +449,48 @@ elif page == "💼 Portfolio":
     with st.spinner("Fetching balance from OKX…"):
         try:
             from src.okx_client import get_balance
-            rows = run_async(get_balance(demo=True))
+            raw = run_async(get_balance(demo=True))
         except Exception as e:
             st.error(f"Could not fetch balance: {e}")
-            rows = []
+            raw = []
 
-    if rows:
-        total_equity = sum(float(r.get("equity") or 0) for r in rows)
-        st.metric("Total Account Equity (approx)", f"${total_equity:,.2f}")
+    # ATK returns [{..., "totalEq": "...", "details": [...]}]
+    account   = raw[0] if raw else {}
+    holdings  = account.get("details", [])
+    total_usd = float(account.get("totalEq") or 0)
 
+    if holdings:
+        st.metric("Total Account Value", f"${total_usd:,.2f}")
+        st.divider()
         st.subheader("Holdings")
+
         cols = st.columns(3)
-        for i, row in enumerate(rows):
-            currency = row.get("currency", "?")
-            equity   = float(row.get("equity") or 0)
-            avail    = float(row.get("available") or 0)
+        for i, h in enumerate(holdings):
+            ccy       = h.get("ccy", "?")
+            eq        = float(h.get("eq") or 0)
+            avail     = float(h.get("availBal") or 0)
+            eq_usd    = float(h.get("eqUsd") or 0)
+            upl       = float(h.get("spotUpl") or 0)
+            upl_pct   = float(h.get("spotUplRatio") or 0) * 100
+            avg_px    = float(h.get("openAvgPx") or 0)
+            pct_port  = (eq_usd / total_usd * 100) if total_usd > 0 else 0
+            bar       = "█" * int(pct_port / 5) + "░" * (20 - int(pct_port / 5))
+            upl_color = "#3fb950" if upl >= 0 else "#f85149"
+
             with cols[i % 3]:
-                pct = (equity / total_equity * 100) if total_equity > 0 else 0
-                bar = "█" * int(pct / 5) + "░" * (20 - int(pct / 5))
                 st.markdown(f"""<div class="net-card">
-                    <h4>{currency}</h4>
-                    <p><strong>Equity:</strong> {equity:,.4f}</p>
-                    <p><strong>Available:</strong> {avail:,.4f}</p>
-                    <p style="color:#8b949e;font-size:11px;">{bar} {pct:.1f}%</p>
+                    <h4>{ccy}</h4>
+                    <p><strong>Balance:</strong> {eq:,.6g}
+                       &nbsp;·&nbsp; <strong>≈ ${eq_usd:,.2f}</strong></p>
+                    <p><strong>Available:</strong> {avail:,.6g}</p>
+                    {f'<p><strong>Avg buy:</strong> ${avg_px:,.4f}</p>' if avg_px > 0 else ''}
+                    {f'<p><strong>P&amp;L:</strong> <span style="color:{upl_color};">{upl:+.4f} ({upl_pct:+.2f}%)</span></p>' if upl != 0 else ''}
+                    <p style="color:#8b949e;font-size:11px;">{bar} {pct_port:.1f}% of portfolio</p>
                 </div>""", unsafe_allow_html=True)
 
         st.divider()
         st.subheader("💡 What does this mean?")
-        s = settings  # already loaded in sidebar
+        s = settings
         st.info(
             f"**Your setup:** Budget ${s['budget_usd']:.0f} · "
             f"Max {s['max_commodity_ratio']}% in one token · "

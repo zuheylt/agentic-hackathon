@@ -92,6 +92,46 @@ async def execute_from_ui(demo: bool = True) -> dict:
     return data
 
 
+async def force_execute_from_ui(demo: bool = True) -> dict:
+    """Override the council — execute a REJECTED proposal anyway."""
+    data = json.loads(_DECISION_PATH.read_text())
+    if data["status"] != "REJECTED":
+        return data
+
+    prop       = data["proposal"]
+    inst_id    = f"{prop['token']}-USDT"
+    action     = prop["action"]
+    amount_usd = prop["amount_usd"]
+
+    if action == "HOLD":
+        data["status"] = "FORCE_EXECUTED"
+        data["execution"]["order_id"] = "HOLD"
+    else:
+        try:
+            if action == "BUY":
+                order = await place_spot_order(inst_id, "buy", str(round(amount_usd, 4)), "quote_ccy", demo)
+            else:
+                ticker   = await get_ticker(inst_id, demo=demo)
+                token_sz = round(amount_usd / float(ticker["last"]), 6)
+                order    = await place_spot_order(inst_id, "sell", str(token_sz), demo=demo)
+
+            data["status"]                = "FORCE_EXECUTED"
+            data["execution"]["order_id"] = order.get("ordId", "unknown")
+        except Exception as e:
+            data["execution"]["order_id"] = f"ERROR: {e}"
+
+    _DECISION_PATH.write_text(json.dumps(data, indent=2))
+
+    if _HISTORY_PATH.exists():
+        history = json.loads(_HISTORY_PATH.read_text())
+        if history:
+            history[0]["status"]                = data["status"]
+            history[0]["execution"]["order_id"] = data["execution"]["order_id"]
+            _HISTORY_PATH.write_text(json.dumps(history, indent=2))
+
+    return data
+
+
 async def _log_balance(demo: bool) -> None:
     try:
         rows = await get_balance(demo=demo)

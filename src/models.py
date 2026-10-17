@@ -48,6 +48,6 @@ class FinalDecision(BaseModel):
     votes: List[CouncilVote]
     consensus_reached: bool
     timestamp: datetime
-    status: Literal["PENDING_EXECUTION", "REJECTED", "EXECUTED"]
+    status: Literal["PENDING_EXECUTION", "REJECTED", "EXECUTED", "FORCE_EXECUTED"]
     signal: MarketSignal | None = None
     order_id: str | None = None
