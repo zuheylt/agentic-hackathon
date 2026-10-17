@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: pockettrader
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: OKX_API_KEY
+        sync: false
+      - key: OKX_SECRET_KEY
+        sync: false
+      - key: OKX_PASSPHRASE
+        sync: false
+      - key: PRIVATE_KEY
+        sync: false
+      - key: REGISTRY_CONTRACT_ADDRESS
+        value: 0x47B98192613D218dE84ca3Fa5Dd04dA7AF6b2887
+      - key: AVALANCHE_RPC_URL
+        value: https://api.avax-test.network/ext/bc/C/rpc
+      - key: AGENT_ID
+        value: "1"
+      - key: CHAIN_ID
+        value: "43113"
+      - key: DRY_RUN
+        value: "false"
