@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["nodejs_20", "nodePackages.npm"]
+
+[phases.install]
+cmds = [
+  "pip install -r requirements.txt",
+  "npm install -g @okx_ai/okx-trade-mcp @okx_ai/okx-trade-cli --allow-scripts=@okx_ai/okx-trade-cli,@okx_ai/okx-trade-mcp"
+]
+
+[start]
+cmd = "python setup_railway.py && streamlit run app.py --server.port=$PORT --server.address=0.0.0.0"

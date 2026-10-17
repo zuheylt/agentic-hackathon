@@ -5,14 +5,37 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import shutil
 from pathlib import Path
 
-ATK_BIN = str(Path.home() / ".npm-global" / "bin" / "okx")
+
+def _find_atk() -> str:
+    # Check system PATH first (Railway), then local npm-global (dev)
+    found = shutil.which("okx")
+    if found:
+        return found
+    local = Path.home() / ".npm-global" / "bin" / "okx"
+    if local.exists():
+        return str(local)
+    raise FileNotFoundError(
+        "OKX ATK binary not found. Install with: "
+        "npm install -g @okx_ai/okx-trade-mcp @okx_ai/okx-trade-cli"
+    )
+
+
+_ATK_BIN: str | None = None
+
+
+def _atk() -> str:
+    global _ATK_BIN
+    if _ATK_BIN is None:
+        _ATK_BIN = _find_atk()
+    return _ATK_BIN
 
 
 async def call_atk(*args: str, demo: bool = True) -> list | dict:
     mode_flag = "--demo" if demo else "--live"
-    cmd = [ATK_BIN, mode_flag, "--json"] + list(args)
+    cmd = [_atk(), mode_flag, "--json"] + list(args)
 
     proc = await asyncio.create_subprocess_exec(
         *cmd,

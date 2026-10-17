@@ -12,7 +12,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv("contracts/.env")
+load_dotenv("contracts/.env")  # local dev; Railway sets these as system env vars
 
 _RPC_URL          = os.getenv("AVALANCHE_RPC_URL", "https://api.avax-test.network/ext/bc/C/rpc")
 _CONTRACT_ADDRESS = os.getenv("REGISTRY_CONTRACT_ADDRESS", "")
