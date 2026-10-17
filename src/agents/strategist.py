@@ -8,20 +8,13 @@ import os
 from google import genai
 from google.genai import types
 
+from src.agents._utils import strip_fences
 from src.models import MarketSignal, TradeProposal
 from src import logger
 
 
 _client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
 _MODEL = "gemini-flash-lite-latest"
-
-
-def _strip_fences(text: str) -> str:
-    if text.startswith("```"):
-        text = text.split("```")[1]
-        if text.startswith("json"):
-            text = text[4:]
-    return text.strip()
 
 
 def _build_system(settings: dict) -> str:
@@ -76,7 +69,7 @@ async def run_strategist(signal: MarketSignal, settings: dict | None = None) -> 
         ),
     )
 
-    data = json.loads(_strip_fences(response.text.strip()))
+    data = json.loads(strip_fences(response.text))
     proposal = TradeProposal(**data)
     logger.result(
         "Strategist",

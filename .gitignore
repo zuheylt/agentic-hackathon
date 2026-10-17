@@ -1,7 +1,11 @@
 .env
+**/.env
+contracts/.env
 __pycache__/
 *.pyc
 *.pyo
 .venv/
 venv/
 data/latest_decision.json
+data/settings.json
+data/history.json

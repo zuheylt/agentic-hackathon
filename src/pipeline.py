@@ -6,6 +6,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from src.agents._utils import format_volume
 from src.agents.signal_agents import gather_signals
 from src.agents.strategist import run_strategist
 from src.agents.council import run_council_vote
@@ -99,13 +100,8 @@ def _to_ui_dict(decision: FinalDecision) -> dict:
     else:
         verdict = "NEUTRAL"
 
-    vol = signal.volume_24h if signal else 0.0
-    if vol >= 1e9:
-        vol_str = f"${vol / 1e9:.1f}B"
-    elif vol >= 1e6:
-        vol_str = f"${vol / 1e6:.1f}M"
-    else:
-        vol_str = f"${vol:,.0f}"
+    vol     = signal.volume_24h if signal else 0.0
+    vol_str = format_volume(vol)
 
     return {
         "timestamp": decision.timestamp.strftime("%Y-%m-%d %H:%M:%S UTC"),

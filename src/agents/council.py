@@ -10,6 +10,7 @@ from typing import List
 from google import genai
 from google.genai import types
 
+from src.agents._utils import strip_fences
 from src.models import CouncilVote, MarketSignal, TradeProposal
 from src import logger
 
@@ -17,7 +18,6 @@ from src import logger
 _client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
 _MODEL = "gemini-flash-lite-latest"
 
-# Split into two groups of 5 — each group is one API call, both run in parallel
 _BATCH_A = [
     ("RiskOfficer",
      "Auto-reject if: amount exceeds max, RSI too high on BUY, sentiment < -0.5 on BUY, RSI too low on SELL. Capital preservation first."),
@@ -54,26 +54,20 @@ def _build_batch_prompt(members: list, signal: MarketSignal, proposal: TradeProp
     rsi_buy  = {"conservative": 60, "moderate": 70, "aggressive": 78}[risk]
     rsi_sell = {"conservative": 40, "moderate": 30, "aggressive": 22}[risk]
 
-    names_list = "\n".join(
-        f"{i+1}. {name}: {desc}" for i, (name, desc) in enumerate(members)
-    )
+    names_list = "\n".join(f"{i+1}. {name}: {desc}" for i, (name, desc) in enumerate(members))
     names_json = "\n".join(
         f'  {{"agent_name": "{name}", "approved": true|false, "confidence": 0.0-1.0, "reason": "<one sentence>"}}'
         for name, _ in members
     )
 
-    system = f"""You are simulating {len(members)} crypto trading council members.
-Council config: Budget ${budget:.0f} | Risk: {risk} | Max/trade: ${max_usd:.2f} | RSI BUY limit: {rsi_buy} | RSI SELL floor: {rsi_sell}
-
-Members and their rules:
-{names_list}
-
-Return ONLY a JSON array with exactly {len(members)} objects in the same order:
-[
-{names_json}
-]
-Return ONLY the JSON array. No markdown fences."""
-
+    system = (
+        f"You are simulating {len(members)} crypto trading council members.\n"
+        f"Council config: Budget ${budget:.0f} | Risk: {risk} | Max/trade: ${max_usd:.2f} | "
+        f"RSI BUY limit: {rsi_buy} | RSI SELL floor: {rsi_sell}\n\n"
+        f"Members and their rules:\n{names_list}\n\n"
+        f"Return ONLY a JSON array with exactly {len(members)} objects in the same order:\n"
+        f"[\n{names_json}\n]\nReturn ONLY the JSON array. No markdown fences."
+    )
     user = (
         f"Proposal: {proposal.action} {proposal.from_token}->{proposal.to_token} ${proposal.amount_usd:.2f}\n"
         f"Rationale: {proposal.rationale}\n"
@@ -89,17 +83,9 @@ async def _run_batch(members: list, signal: MarketSignal, proposal: TradeProposa
     response = await _client.aio.models.generate_content(
         model=_MODEL,
         contents=user,
-        config=types.GenerateContentConfig(
-            system_instruction=system,
-            max_output_tokens=600,
-        ),
+        config=types.GenerateContentConfig(system_instruction=system, max_output_tokens=600),
     )
-    text = response.text.strip()
-    if text.startswith("```"):
-        text = text.split("```")[1]
-        if text.startswith("json"):
-            text = text[4:]
-    return [CouncilVote(**v) for v in json.loads(text.strip())]
+    return [CouncilVote(**v) for v in json.loads(strip_fences(response.text))]
 
 
 async def run_council_vote(
@@ -119,17 +105,16 @@ async def run_council_vote(
     for v in votes:
         logger.vote_line(v.agent_name, v.approved, v.confidence, v.reason)
 
-    risk_vote     = next(v for v in votes if v.agent_name == "RiskOfficer")
-    risk_approved = risk_vote.approved
-    approval_rate = sum(v.approved for v in votes) / len(votes)
-    consensus     = risk_approved and approval_rate >= 0.70
+    risk_vote      = next(v for v in votes if v.agent_name == "RiskOfficer")
+    risk_approved  = risk_vote.approved
+    approved_count = sum(v.approved for v in votes)
+    approval_rate  = approved_count / len(votes)
+    consensus      = risk_approved and approval_rate >= 0.70
 
     logger.log(
         "Council",
-        f"Result: {sum(v.approved for v in votes)}/{len(votes)} approved | "
+        f"Result: {approved_count}/{len(votes)} approved | "
         f"RiskOfficer={'✓' if risk_approved else 'VETOED'} | "
-        f"Rate={approval_rate:.0%} | "
-        f"Consensus={'YES' if consensus else 'NO'}",
+        f"Rate={approval_rate:.0%} | Consensus={'YES' if consensus else 'NO'}",
     )
-
     return votes, consensus

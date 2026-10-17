@@ -2,8 +2,11 @@ import asyncio
 import json
 import os
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+from google import genai as _genai
+from google.genai import types as _types
 import streamlit as st
 from dotenv import load_dotenv
 
@@ -50,25 +53,8 @@ AGENT_ICONS = {
     "LiquidityAnalyst": "💧", "WhaleWatcher": "🐋",
 }
 
-AGENT_DESCRIPTIONS = {
-    "RiskOfficer":        "Guards your capital. Has veto power.",
-    "MomentumTrader":     "Follows price trends and volume.",
-    "MacroAnalyst":       "Looks at the big crypto market picture.",
-    "ContrarianTrader":   "Bets against the crowd when hype is too high.",
-    "FundamentalsAnalyst":"Checks if the token has real value.",
-    "QuantAnalyst":       "Uses pure math and statistics.",
-    "GrowthInvestor":     "Thinks long-term, ignores short noise.",
-    "SentimentAnalyst":   "Reads market mood and social signals.",
-    "LiquidityAnalyst":   "Checks if the market is deep enough to trade.",
-    "WhaleWatcher":       "Tracks large investor accumulation patterns.",
-}
-
-SETTINGS_DEFAULTS = {
-    "budget_usd": 100.0, "risk_strategy": "moderate",
-    "max_tx_usd": 5.0, "max_commodity_ratio": 30,
-    "stop_loss_pct": 5.0, "take_profit_pct": 15.0,
-    "max_daily_trades": 5, "auto_execute": False,
-}
+from src.agents._utils import format_volume
+from src.config import DEFAULTS as SETTINGS_DEFAULTS, load_settings, save_settings
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 def load_decision() -> dict | None:
@@ -89,21 +75,8 @@ def load_history() -> list:
     return []
 
 
-def load_settings() -> dict:
-    if SETTINGS_PATH.exists():
-        try:
-            return {**SETTINGS_DEFAULTS, **json.loads(SETTINGS_PATH.read_text())}
-        except Exception:
-            pass
-    return SETTINGS_DEFAULTS.copy()
-
-
-def save_settings(s: dict) -> None:
-    SETTINGS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    SETTINGS_PATH.write_text(json.dumps(s, indent=2))
-
-
-_thread_pool = __import__("concurrent.futures", fromlist=["ThreadPoolExecutor"]).ThreadPoolExecutor(max_workers=2)
+_thread_pool = ThreadPoolExecutor(max_workers=2)
+_assistant_client = _genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
 
 
 def run_async(coro):
@@ -136,7 +109,6 @@ if page == "🏠 Dashboard":
     st.title("⚡ CouncilTrade Dashboard")
     st.caption("Run the AI council on any OKX token and see a full decision breakdown.")
 
-    # ── Run controls ──────────────────────────────────────────────────────────
     # ── Market Scanner ────────────────────────────────────────────────────────
     with st.expander("🔍 Scan Multiple Tokens — find the best opportunity", expanded=False):
         from src.data.scanner import DEFAULT_WATCHLIST
@@ -174,7 +146,7 @@ if page == "🏠 Dashboard":
                 change = r["change_24h_pct"]
                 change_color = "#3fb950" if change >= 0 else "#f85149"
                 vol = r["volume_24h"]
-                vol_str = f"${vol/1e9:.1f}B" if vol >= 1e9 else f"${vol/1e6:.1f}M"
+                vol_str = format_volume(vol)
                 score_bar = "█" * int(r["opportunity_score"] * 10) + "░" * (10 - int(r["opportunity_score"] * 10))
 
                 row = st.columns([1.2, 1.2, 1, 1, 1, 1, 1.2])
@@ -222,6 +194,7 @@ if page == "🏠 Dashboard":
                     run_async(run_live_pipeline(inst_id, demo=True, settings=settings,
                                                auto_execute=settings["auto_execute"]))
                 st.success("Done! Decision written.")
+                st.session_state["_just_ran"] = True
             except Exception as e:
                 st.error(f"Pipeline error: {e}")
         st.rerun()
@@ -240,7 +213,7 @@ if page == "🏠 Dashboard":
                     "PENDING_EXECUTION": "#d29922"}.get(status, "#c9d1d9")
     st.markdown(
         f'<span style="color:{status_color}; font-size:18px; font-weight:bold;">● {status}</span>'
-        f' &nbsp;·&nbsp; <span style="color:#8b949e;">{data["timestamp"]}</span>',
+        f' &nbsp;·&nbsp; <span style="color:#8b949e;">{data.get("timestamp", "—")}</span>',
         unsafe_allow_html=True,
     )
 
@@ -328,8 +301,10 @@ if page == "🏠 Dashboard":
                     unsafe_allow_html=True)
 
     st.caption(f"Auto-refreshing · Last updated: {data['timestamp']}")
-    time.sleep(3)
-    st.rerun()
+    if st.session_state.get("_just_ran"):
+        st.session_state["_just_ran"] = False
+        time.sleep(2)
+        st.rerun()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -339,7 +314,7 @@ elif page == "⚙️ Setup":
     st.title("⚙️ Agent Setup")
     st.caption("Configure how the council behaves. Changes take effect on the next run.")
 
-    s = load_settings()
+    s = settings  # already loaded in sidebar
 
     st.subheader("💰 Capital & Position Sizing")
     col1, col2 = st.columns(2)
@@ -475,7 +450,7 @@ elif page == "💼 Portfolio":
 
         st.divider()
         st.subheader("💡 What does this mean?")
-        s = load_settings()
+        s = settings  # already loaded in sidebar
         st.info(
             f"**Your setup:** Budget ${s['budget_usd']:.0f} · "
             f"Max {s['max_commodity_ratio']}% in one token · "
@@ -545,23 +520,26 @@ elif page == "🤖 Assistant":
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    data     = load_decision()
-    settings = load_settings()
-    history  = load_history()
+    data    = load_decision()
+    history = load_history()
+    # settings already loaded in sidebar
 
     def _build_system() -> str:
-        decision_summary = "No decision has been run yet." if not data else (
-            f"Latest decision: {data['proposal']['action']} {data['proposal']['token']} "
-            f"${data['proposal']['amount_usd']} — Status: {data['status']} — "
-            f"Votes: {data['council'].get('approved_count','?')}/{data['council'].get('total_count',10)} approved. "
-            f"Rationale: {data['proposal']['rationale']}. "
-            f"RSI: {data['technical']['rsi']} ({data['technical']['verdict']}). "
-            f"Sentiment: {data['sentiment']['score']:+.2f}. "
-            "Individual votes: " + "; ".join(
-                f"{v['agent']}: {v['status']} ({v['confidence']}) — {v['reason']}"
-                for v in data['council'].get('votes', [])
+        if data:
+            decision_summary = (
+                f"Latest decision: {data['proposal']['action']} {data['proposal']['token']} "
+                f"${data['proposal']['amount_usd']} — Status: {data['status']} — "
+                f"Votes: {data['council'].get('approved_count','?')}/{data['council'].get('total_count',10)} approved. "
+                f"Rationale: {data['proposal']['rationale']}. "
+                f"RSI: {data['technical']['rsi']} ({data['technical']['verdict']}). "
+                f"Sentiment: {data['sentiment']['score']:+.2f}. "
+                "Individual votes: " + "; ".join(
+                    f"{v['agent']}: {v['status']} ({v['confidence']}) — {v['reason']}"
+                    for v in data['council'].get('votes', [])
+                )
             )
-        ) if data else "No decision has been run yet."
+        else:
+            decision_summary = "No decision has been run yet."
 
         recent = ""
         if history:
@@ -626,18 +604,14 @@ Your communication rules:
         with st.chat_message("assistant"):
             with st.spinner("CouncilBot is thinking…"):
                 try:
-                    from google import genai as _genai
-                    from google.genai import types as _types
-
-                    _client = _genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
-                    contents = []
-                    for msg in st.session_state.chat_history:
-                        role = "user" if msg["role"] == "user" else "model"
-                        contents.append(
-                            _types.Content(role=role, parts=[_types.Part(text=msg["content"])])
+                    contents = [
+                        _types.Content(
+                            role="user" if msg["role"] == "user" else "model",
+                            parts=[_types.Part(text=msg["content"])]
                         )
-
-                    response = _client.models.generate_content(
+                        for msg in st.session_state.chat_history
+                    ]
+                    response = _assistant_client.models.generate_content(
                         model="gemini-flash-lite-latest",
                         contents=contents,
                         config=_types.GenerateContentConfig(
