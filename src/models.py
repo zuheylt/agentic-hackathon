@@ -22,8 +22,22 @@ class TradeProposal(BaseModel):
     rationale: str
 
 
+AgentName = Literal[
+    "RiskOfficer",
+    "MomentumTrader",
+    "MacroAnalyst",
+    "ContrarianTrader",
+    "FundamentalsAnalyst",
+    "QuantAnalyst",
+    "GrowthInvestor",
+    "SentimentAnalyst",
+    "LiquidityAnalyst",
+    "WhaleWatcher",
+]
+
+
 class CouncilVote(BaseModel):
-    agent_name: Literal["RiskOfficer", "MomentumTrader"]
+    agent_name: AgentName
     approved: bool
     confidence: float = Field(ge=0.0, le=1.0)
     reason: str
@@ -35,3 +49,5 @@ class FinalDecision(BaseModel):
     consensus_reached: bool
     timestamp: datetime
     status: Literal["PENDING_EXECUTION", "REJECTED", "EXECUTED"]
+    signal: MarketSignal | None = None
+    order_id: str | None = None

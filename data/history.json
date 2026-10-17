@@ -1,0 +1,103 @@
+[
+  {
+    "timestamp": "2026-10-17 09:32:45 UTC",
+    "status": "EXECUTED",
+    "technical": {
+      "rsi": 38.56,
+      "volume_24h": "$107.0M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "ETH/USDT trading at $2,434.84. 24h change: -0.75% (H: $2,493.72 / L: $2,388.69). RSI(14): 38.56. 24h volume: $106,985,230."
+    },
+    "proposal": {
+      "action": "BUY",
+      "token": "ETH",
+      "amount_usd": 3.5,
+      "rationale": "ETH is approaching oversold territory with an RSI of 38.56, presenting a favorable accumulation opportunity near the lower end of its 24h range."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "Trade amount is within max limits and RSI is well below the buy limit of 70."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "40%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "95%",
+          "reason": "Trade amount is within max limits and RSI is well below the buy limit of 70."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "RSI is declining towards oversold, lacking a confirmed upward momentum reversal signal."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Favorable entry near the lower end of the 24-hour range presents a solid macro accumulation context."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "85%",
+          "reason": "Neutral sentiment with a depressed RSI indicates the crowd is overly cautious, creating a good fading opportunity."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "75%",
+          "reason": "Buying near the lower daily range provides a rational value entry rather than chasing pure hype."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "APPROVED",
+          "confidence": "75%",
+          "reason": "RSI at 38.56 approaches the oversold threshold with high volume confirming market participation."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "APPROVED",
+          "confidence": "85%",
+          "reason": "A minor pullback to $2,434 presents a solid long-term accumulation opportunity for Ethereum."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "Sentiment is sitting at neutral 0.00, reducing my overall confidence in an immediate bounce."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "95%",
+          "reason": "Massive 24h volume of over $106 million ensures clean execution with negligible slippage."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "50%",
+          "reason": "High volume combined with completely neutral sentiment lacks clear signs of institutional accumulation."
+        }
+      ],
+      "consensus_passed": true,
+      "consensus_score": "70%",
+      "approved_count": 7,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "4017377047946366976",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/eth-usdt"
+    }
+  }
+]

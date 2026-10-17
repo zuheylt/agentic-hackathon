@@ -13,23 +13,7 @@ from src import logger
 
 
 _client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
-_MODEL = "gemini-3.8-flash"
-
-_STRATEGIST_SYSTEM = """You are a crypto trading strategist.
-Given a market signal, produce a concrete trade proposal.
-The amount_usd must be between $1 and $5 (small position for risk control).
-Return ONLY valid JSON matching this schema:
-{
-  "action": "<BUY|SELL|HOLD>",
-  "from_token": "<token or USD>",
-  "to_token": "<token or USD>",
-  "amount_usd": <float 1.0 to 5.0>,
-  "rationale": "<one clear sentence explaining the trade>"
-}
-Rules:
-- BUY: from_token = "USD", to_token = signal token
-- SELL: from_token = signal token, to_token = "USD"
-- HOLD: from_token and to_token both equal signal token, amount_usd = 0"""
+_MODEL = "gemini-flash-lite-latest"
 
 
 def _strip_fences(text: str) -> str:
@@ -40,10 +24,41 @@ def _strip_fences(text: str) -> str:
     return text.strip()
 
 
-async def run_strategist(signal: MarketSignal) -> TradeProposal:
+def _build_system(settings: dict) -> str:
+    max_usd = settings.get("max_tx_usd", 5.0)
+    risk = settings.get("risk_strategy", "moderate")
+    budget = settings.get("budget_usd", 100.0)
+
+    size_guidance = {
+        "conservative": f"Use 50-70% of max (${max_usd * 0.6:.2f}) unless the signal is very strong.",
+        "moderate":     f"Use 70-90% of max (${max_usd * 0.8:.2f}) when signal is clear.",
+        "aggressive":   f"Use the full max (${max_usd:.2f}) when signal is strong.",
+    }[risk]
+
+    return f"""You are a crypto trading strategist.
+Given a market signal, produce a concrete trade proposal.
+amount_usd must be between $1.00 and ${max_usd:.2f}.
+Total portfolio budget: ${budget:.2f}. Risk strategy: {risk}.
+Position sizing guidance: {size_guidance}
+Return ONLY valid JSON:
+{{
+  "action": "<BUY|SELL|HOLD>",
+  "from_token": "<token or USD>",
+  "to_token": "<token or USD>",
+  "amount_usd": <float 1.0 to {max_usd:.2f}>,
+  "rationale": "<one clear sentence explaining the trade>"
+}}
+Rules:
+- BUY: from_token = "USD", to_token = signal token
+- SELL: from_token = signal token, to_token = "USD"
+- HOLD: from_token and to_token both equal signal token, amount_usd = 0"""
+
+
+async def run_strategist(signal: MarketSignal, settings: dict | None = None) -> TradeProposal:
     logger.section("Layer 2 — Strategist")
     logger.log("Strategist", f"Synthesizing proposal for {signal.token}...")
 
+    system = _build_system(settings or {})
     prompt = (
         f"Token: {signal.token}\n"
         f"RSI: {signal.rsi}\n"
@@ -55,7 +70,10 @@ async def run_strategist(signal: MarketSignal) -> TradeProposal:
     response = await _client.aio.models.generate_content(
         model=_MODEL,
         contents=prompt,
-        config=types.GenerateContentConfig(system_instruction=_STRATEGIST_SYSTEM),
+        config=types.GenerateContentConfig(
+            system_instruction=system,
+            max_output_tokens=300,
+        ),
     )
 
     data = json.loads(_strip_fences(response.text.strip()))
