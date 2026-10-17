@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Bullish ETH Breakout",
+    "token": "ETH",
+    "rsi": 62.5,
+    "volume_24h": 18500000000,
+    "sentiment_score": 0.72,
+    "summary": "ETH breaks key resistance at $2,800 with strong volume. Social sentiment highly positive following Layer-2 adoption surge. Institutional inflows detected on-chain."
+  },
+  {
+    "name": "BTC Overbought Warning",
+    "token": "BTC",
+    "rsi": 78.4,
+    "volume_24h": 42000000000,
+    "sentiment_score": 0.45,
+    "summary": "BTC nearing overbought territory. Volume declining despite price rise — classic bearish divergence. Mixed sentiment: bulls hold support but bears see distribution pattern."
+  },
+  {
+    "name": "SOL High-Risk Momentum",
+    "token": "SOL",
+    "rsi": 55.1,
+    "volume_24h": 3200000000,
+    "sentiment_score": -0.15,
+    "summary": "SOL shows moderate RSI but negative sentiment drift following network congestion reports. Volume is below 30-day average. Risk environment elevated."
+  },
+  {
+    "name": "AVAX Undervalued Opportunity",
+    "token": "AVAX",
+    "rsi": 38.2,
+    "volume_24h": 890000000,
+    "sentiment_score": 0.28,
+    "summary": "AVAX testing major support with oversold RSI. Developer activity up 40% this month. Positive sentiment emerging as subnets gain traction with enterprise partners."
+  }
+]
