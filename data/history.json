@@ -1,5 +1,1419 @@
 [
   {
+    "timestamp": "2026-10-17 10:27:00 UTC",
+    "status": "EXECUTED",
+    "technical": {
+      "rsi": 60.05,
+      "volume_24h": "$122.6M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "SOL/USDT trading at $104.76. 24h change: -1.13% (H: $107.42 / L: $102.52). RSI(14): 60.05. 24h volume: $122,568,147."
+    },
+    "proposal": {
+      "action": "BUY",
+      "token": "SOL",
+      "amount_usd": 22.0,
+      "rationale": "RSI at 60.05 indicates healthy upward momentum without being overbought, supporting a moderate long entry on SOL."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "Trade amount of $22.00 is within our $30.00 limit and RSI of 60.05 is safely below the 70 buy threshold."
+      },
+      "momentum_trader": {
+        "status": "APPROVED",
+        "confidence": "80%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Trade amount of $22.00 is within our $30.00 limit and RSI of 60.05 is safely below the 70 buy threshold."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "An RSI of 60.05 combined with strong volume confirms a healthy upward momentum without hitting overbought levels."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "75%",
+          "reason": "The market is not overheated at this RSI level, making it a reasonable entry point within the broader trend."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Sentiment is neutral at 0.00 and RSI is moderate, meaning the crowd isn't overly euphoric yet."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "The setup is supported by healthy volume and reasonable technicals rather than pure blind hype."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "At 60.05, the RSI sits in the 40-60 dead zone lacking a strong statistical edge."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Healthy momentum and solid utility make this a reasonable dip entry for the long term."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "Neutral sentiment at 0.00 reduces confidence in an immediate upward catalyst."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "The robust 24h volume ensures clean execution with minimal slippage risk."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "High volume combined with flat neutral sentiment does not indicate clear institutional accumulation."
+        }
+      ],
+      "consensus_passed": true,
+      "consensus_score": "70%",
+      "approved_count": 7,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "4017486288896036864",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/sol-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:26:37 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 53.68,
+      "volume_24h": "$113.2M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "ETH/USDT trading at $2,435.79. 24h change: -0.67% (H: $2,493.72 / L: $2,388.69). RSI(14): 53.68. 24h volume: $113,228,621."
+    },
+    "proposal": {
+      "action": "HOLD",
+      "token": "ETH",
+      "amount_usd": 0.0,
+      "rationale": "Neutral RSI and flat price action suggest waiting for a clearer directional trend before entering a position."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "Holding position requires no capital outlay and carries zero risk."
+      },
+      "momentum_trader": {
+        "status": "APPROVED",
+        "confidence": "80%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Holding position requires no capital outlay and carries zero risk."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Neutral RSI and flat price action validate waiting for a clearer directional trend."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "85%",
+          "reason": "Market is currently range-bound, making a hold stance prudent until macro direction emerges."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "75%",
+          "reason": "No crowd euphoria or panic detected, so holding aligns with patient observation."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Without a clear underlying catalyst or trend shift, sitting on the sidelines is fundamentally sound."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "85%",
+          "reason": "RSI of 53.68 falls into the 40-60 neutral dead zone where no statistical edge exists."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "REJECTED",
+          "confidence": "70%",
+          "reason": "Flat price action and neutral conditions offer no compelling dip or utility entry point right now."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "Sentiment is exactly 0.00, indicating total neutrality and reducing confidence for any new directional trades."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "60%",
+          "reason": "Volume is extremely high at over $113M, ensuring clean execution if a trade were chosen."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "75%",
+          "reason": "Neutral sentiment combined with flat action shows a complete lack of institutional accumulation signals."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "60%",
+      "approved_count": 6,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/eth-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:26:35 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 53.44,
+      "volume_24h": "$113.2M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "ETH/USDT trading at $2,435.79. 24h change: -0.67% (H: $2,493.72 / L: $2,388.69). RSI(14): 53.44. 24h volume: $113,228,621."
+    },
+    "proposal": {
+      "action": "HOLD",
+      "token": "ETH",
+      "amount_usd": 0.0,
+      "rationale": "Neutral RSI and flat price action suggest waiting for a clearer directional trend before entering a position."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "No capital is being deployed on a HOLD proposal, ensuring total capital preservation."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "80%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "100%",
+          "reason": "No capital is being deployed on a HOLD proposal, ensuring total capital preservation."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "RSI is neutral at 53.44 and price action is flat, offering no momentum edge to trade."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "A neutral stance is appropriate given the lack of clear directional macro signals in the current range."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "REJECTED",
+          "confidence": "50%",
+          "reason": "There is no extreme sentiment or crowd euphoria to fade at this time."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Sidelining capital makes sense when neither momentum nor fundamental catalysts are present to justify entry."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "85%",
+          "reason": "RSI at 53.44 falls directly into the 40-60 dead zone, offering no statistical edge for a trade."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "REJECTED",
+          "confidence": "70%",
+          "reason": "Flat price action and neutral conditions lack the conviction needed for a long-term utility play."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "Sentiment sits exactly at 0.00, indicating total market neutrality and lack of directional conviction."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Massive 24h volume of over $113M ensures clean execution, though waiting is sensible."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "75%",
+          "reason": "Neutral sentiment combined with flat volume action shows no signs of institutional accumulation or distribution."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "40%",
+      "approved_count": 4,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/eth-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:26:21 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 42.16,
+      "volume_24h": "$890,397",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "AVAX/USDT trading at $10.00. 24h change: -3.84% (H: $10.52 / L: $9.89). RSI(14): 42.16. 24h volume: $890,397."
+    },
+    "proposal": {
+      "action": "HOLD",
+      "token": "AVAX",
+      "amount_usd": 0.0,
+      "rationale": "Neutral sentiment and moderate RSI with low volume suggest waiting for a clearer directional breakout."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "No trade is proposed, keeping capital preserved within limits."
+      },
+      "momentum_trader": {
+        "status": "APPROVED",
+        "confidence": "80%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "100%",
+          "reason": "No trade is proposed, keeping capital preserved within limits."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Low volume and neutral RSI confirm lack of momentum, supporting the hold decision."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Market conditions are indecisive, making a neutral stance prudent."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "REJECTED",
+          "confidence": "50%",
+          "reason": "There is no extreme euphoria or panic to fade in this neutral state."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "85%",
+          "reason": "Skeptical of forcing trades without clear signals, holding is entirely justified."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "RSI of 42.16 falls right into the neutral 40-60 zone without any statistical edge or volume confirmation."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "REJECTED",
+          "confidence": "60%",
+          "reason": "Current price action lacks a strong dip opportunity or catalyst, making it better to wait for a clearer trend."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "70%",
+          "reason": "Sentiment sits exactly at 0.00, reducing confidence and failing to support a bullish entry."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "REJECTED",
+          "confidence": "50%",
+          "reason": "Volume is relatively low, presenting slippage risks for clean execution."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "70%",
+          "reason": "Neutral sentiment combined with moderate volume shows no clear sign of institutional accumulation."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "40%",
+      "approved_count": 4,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/avax-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:25:18 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 55.87,
+      "volume_24h": "$3.1B",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "BTC/USDT trading at $81,601.20. 24h change: -0.54% (H: $82,924.50 / L: $80,809.60). RSI(14): 55.87. 24h volume: $3,052,144,359."
+    },
+    "proposal": {
+      "action": "HOLD",
+      "token": "BTC",
+      "amount_usd": 0.0,
+      "rationale": "Neutral RSI and sideways price action suggest holding current position until a clearer trend emerges."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "Holding current position requires zero capital deployment and carries no trade risk."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "30%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "100%",
+          "reason": "Holding current position requires zero capital deployment and carries no trade risk."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "Sideways price action and neutral RSI offer no momentum edge to justify a new trade."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Market consolidation at current levels warrants a patient holding stance until macro direction clarifies."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "With neutral sentiment and price, holding aligns with waiting for the crowd to show clear bias before fading."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Absence of strong catalysts justifies maintaining the status quo rather than forcing speculative moves."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "RSI at 55.87 is in the neutral 40-60 zone offering no statistical edge for a new trade."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "REJECTED",
+          "confidence": "70%",
+          "reason": "Sideways price action with neutral conditions lacks the dip-buying opportunity needed to justify capital deployment."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "90%",
+          "reason": "Sentiment is exactly 0.00, which reduces confidence and fails to support any actionable buy or sell recommendation."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Massive 24h volume of over $3 billion ensures extremely clean execution if a trade were desired."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "60%",
+          "reason": "Neutral sentiment combined with sideways action shows no clear sign of institutional accumulation or distribution."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "50%",
+      "approved_count": 5,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/btc-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:23:20 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 42.16,
+      "volume_24h": "$890,400",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "AVAX/USDT trading at $10.00. 24h change: -3.74% (H: $10.52 / L: $9.89). RSI(14): 42.16. 24h volume: $890,400."
+    },
+    "proposal": {
+      "action": "BUY",
+      "token": "AVAX",
+      "amount_usd": 24.0,
+      "rationale": "AVAX is testing key support near $10.00 with a neutral RSI of 42.16, offering a favorable entry for a moderate bounce."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "The trade amount is within limits, RSI of 42.16 is well below the buy limit, and sentiment is neutral."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "40%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "The trade amount is within limits, RSI of 42.16 is well below the buy limit, and sentiment is neutral."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "While RSI is neutral, volume and momentum are showing a downward trend with a 24h change of -3.74%."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Buying near key support levels during a minor pullback offers a favorable risk-reward setup."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "The crowd is selling amidst a minor dip near key support, making this an ideal spot to fade the negativity."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "60%",
+          "reason": "Testing key support provides a logical technical entry point independent of purely emotional sentiment."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "RSI at 42.16 falls into the neutral 40-60 zone lacking statistical edge."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Testing key support near $10 offers a solid long-term accumulation opportunity despite short-term noise."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "Sentiment is sitting right at 0.00, reducing confidence for an immediate bullish entry."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "The 24h volume of $890,400 ensures clean execution with minimal slippage."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "Volume is decent, but neutral sentiment fails to confirm institutional accumulation at this support level."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "60%",
+      "approved_count": 6,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/avax-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:23:09 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 42.16,
+      "volume_24h": "$890,400",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "AVAX/USDT trading at $10.00. 24h change: -3.74% (H: $10.52 / L: $9.89). RSI(14): 42.16. 24h volume: $890,400."
+    },
+    "proposal": {
+      "action": "BUY",
+      "token": "AVAX",
+      "amount_usd": 24.0,
+      "rationale": "AVAX is testing support near its 24h low with neutral RSI, presenting a favorable accumulation opportunity for a moderate risk profile."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "Trade amount of $24.00 is well within the $30.00 maximum and RSI of 42.16 is safely below the 70 buy limit."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "40%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Trade amount of $24.00 is well within the $30.00 maximum and RSI of 42.16 is safely below the 70 buy limit."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "Neutral RSI and negative 24h price change do not provide a strong upward momentum confirmation."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Testing support near the 24h low in neutral conditions presents a reasonable accumulation point."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Fading the -3.74% dip as sentiment is neutral and the crowd is temporarily bearish near support."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "75%",
+          "reason": "Accumulating AVAX near a key support level with a reasonable volume profile makes fundamental sense."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "RSI at 42.16 sits squarely in the 40-60 neutral zone with no statistical edge."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Testing support near the 24h low offers a solid long-term accumulation discount."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "Sentiment is sitting exactly at 0.00, indicating a lack of conviction to support a buy."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "24h volume of $890,400 provides adequate liquidity for a clean execution on a $24 trade."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "Neutral sentiment combined with moderate volume does not signal clear institutional accumulation."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "60%",
+      "approved_count": 6,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/avax-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:22:43 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 56.95,
+      "volume_24h": "$3.1B",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "BTC/USDT trading at $81,631.80. 24h change: -0.50% (H: $82,924.50 / L: $80,809.60). RSI(14): 56.95. 24h volume: $3,056,115,882."
+    },
+    "proposal": {
+      "action": "HOLD",
+      "token": "BTC",
+      "amount_usd": 0.0,
+      "rationale": "Neutral RSI and sideways price action suggest waiting for a clearer directional breakout before entering a position."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "No capital is being deployed with a zero-dollar trade, fully preserving the portfolio."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "20%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "100%",
+          "reason": "No capital is being deployed with a zero-dollar trade, fully preserving the portfolio."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "20%",
+          "reason": "Sideways price action and a neutral RSI offer no directional momentum to trade."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Holding cash and waiting for a breakout is the most prudent stance in a flat, range-bound market."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "60%",
+          "reason": "With zero sentiment and neutral indicators, staying out of the crowd's way is sensible."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Without a clear catalyst or fundamental shift, abstaining from action is justified."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "85%",
+          "reason": "RSI at 56.95 falls within the 40-60 dead zone, offering no statistical edge for a trade."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "REJECTED",
+          "confidence": "70%",
+          "reason": "Sideways price action and neutral momentum do not present a compelling dip-buying opportunity at this time."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "Market sentiment is exactly 0.00, indicating a complete lack of directional conviction."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Extremely high 24h volume ensures flawless execution, though current strategy favors holding."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "75%",
+          "reason": "Neutral sentiment alongside heavy volume suggests a lack of clear institutional accumulation or distribution."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "50%",
+      "approved_count": 5,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/btc-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:20:34 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 53.13,
+      "volume_24h": "$105.8M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "ETH/USDT trading at $2,435.49. 24h change: -0.78% (H: $2,493.72 / L: $2,388.69). RSI(14): 53.13. 24h volume: $105,762,998."
+    },
+    "proposal": {
+      "action": "HOLD",
+      "token": "ETH",
+      "amount_usd": 0.0,
+      "rationale": "ETH is exhibiting neutral momentum with an RSI of 53.13 and flat sentiment, warranting no immediate position change."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "No capital is being deployed with a $0.00 trade size, ensuring absolute capital preservation."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "30%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "100%",
+          "reason": "No capital is being deployed with a $0.00 trade size, ensuring absolute capital preservation."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "Neutral RSI and flat sentiment provide no directional momentum to justify a trade."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "A holding stance is appropriate given the lack of clear macro signals or extreme price action."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "There is no euphoria or panic in the market to fade, making inaction the default choice."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Without a compelling fundamental catalyst or valuation discrepancy, holding current positions is the correct stance."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "85%",
+          "reason": "RSI of 53.13 sits squarely in the 40-60 dead zone with no statistical edge for a trade."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "No dip or strong directional movement to capitalize on for long-term utility accumulation."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "75%",
+          "reason": "Sentiment is completely flat at 0.00, reducing confidence to make any proactive move."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Volume of over $105M ensures clean execution for any rebalancing if needed."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "70%",
+          "reason": "Neutral sentiment combined with flat momentum shows no clear institutional accumulation or distribution pattern."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "40%",
+      "approved_count": 4,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/eth-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:20:14 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 53.13,
+      "volume_24h": "$105.8M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "ETH/USDT trading at $2,435.49. 24h change: -0.78% (H: $2,493.72 / L: $2,388.69). RSI(14): 53.13. 24h volume: $105,760,563."
+    },
+    "proposal": {
+      "action": "HOLD",
+      "token": "ETH",
+      "amount_usd": 0.0,
+      "rationale": "Neutral RSI and flat sentiment indicate a lack of clear directional momentum for ETH."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "No trade amount requested and RSI is within safe neutral limits."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "20%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "100%",
+          "reason": "No trade amount requested and RSI is within safe neutral limits."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "20%",
+          "reason": "Flat sentiment and neutral RSI of 53.13 offer no directional momentum to trade."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "A holding stance is prudent given the lack of clear macro catalysts and flat market conditions."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "No crowd euphoria or panic to fade with sentiment sitting completely neutral at 0.00."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Agree with holding since there is no compelling fundamental reason to allocate capital right now."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "RSI at 53.13 falls within the 40-60 dead zone, offering no statistical edge for a trade."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "REJECTED",
+          "confidence": "50%",
+          "reason": "This is a hold proposal with no dip or clear long-term catalyst currently being executed."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "90%",
+          "reason": "Sentiment is exactly 0.00, indicating neutral market feeling and reducing overall trade confidence."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Volume exceeds $105M, ensuring clean execution if a trade were to happen, though none is requested."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "60%",
+          "reason": "High volume combined with completely neutral sentiment shows no clear institutional accumulation or distribution pattern."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "40%",
+      "approved_count": 4,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/eth-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 10:20:01 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 53.13,
+      "volume_24h": "$105.8M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "ETH/USDT trading at $2,435.49. 24h change: -0.67% (H: $2,493.72 / L: $2,388.69). RSI(14): 53.13. 24h volume: $105,807,542."
+    },
+    "proposal": {
+      "action": "HOLD",
+      "token": "ETH",
+      "amount_usd": 0.0,
+      "rationale": "Neutral RSI and flat price action suggest a consolidation phase, warranting a hold position."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "No capital is being deployed on a hold proposal, preserving our current portfolio safety."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "20%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "100%",
+          "reason": "No capital is being deployed on a hold proposal, preserving our current portfolio safety."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "20%",
+          "reason": "Flat price action and a neutral RSI of 53.13 offer no momentum or breakout signals to trade."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Consolidation phases in a moderate risk environment are best handled by holding and awaiting clearer macro direction."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "With zero sentiment and neutral indicators, there is no crowd extreme to fade right now."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Awaiting a fundamental catalyst rather than forcing trades in flat consolidation makes complete sense."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "80%",
+          "reason": "RSI at 53.13 falls squarely in the 40-60 dead zone offering no statistical trading edge."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "REJECTED",
+          "confidence": "70%",
+          "reason": "Flat price action and consolidation without a clear dip offer no compelling entry for long-term accumulation."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "90%",
+          "reason": "Sentiment is exactly 0.00, indicating neutral market feeling and reducing confidence in any directional trade."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "High 24h volume of over $105 million ensures clean execution, supporting a hold position."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "60%",
+          "reason": "Neutral sentiment combined with flat volume does not signal institutional accumulation or distribution."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "40%",
+      "approved_count": 4,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/eth-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 09:57:22 UTC",
+    "status": "PENDING_EXECUTION",
+    "technical": {
+      "rsi": 33.31,
+      "volume_24h": "$920,358",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "AVAX/USDT trading at $10.03. 24h change: -3.70% (H: $10.52 / L: $9.89). RSI(14): 33.31. 24h volume: $920,358."
+    },
+    "proposal": {
+      "action": "BUY",
+      "token": "AVAX",
+      "amount_usd": 3.5,
+      "rationale": "AVAX is approaching oversold territory with an RSI of 33.31, presenting a moderate risk accumulation opportunity near recent lows."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "Trade amount is within the maximum limit and RSI of 33.31 is well below the buy threshold of 70."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "40%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Trade amount is within the maximum limit and RSI of 33.31 is well below the buy threshold of 70."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "RSI is approaching oversold and volume is relatively low, lacking a confirmed upward momentum signal."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Buying near recent lows with an RSI of 33.31 represents a favorable accumulation setup in an oversold macro context."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Sentiment is neutral at 0.00 while the price dips, allowing us to fade the short-term negative price action."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "60%",
+          "reason": "The trade relies on accumulation near support rather than pure hype, aligning with sound risk-adjusted entry practices."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "APPROVED",
+          "confidence": "85%",
+          "reason": "RSI at 33.31 approaches the oversold threshold below 35, providing a favorable statistical entry with adequate volume."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Buying the dip on AVAX aligns with long-term utility acquisition during a temporary price correction."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "Neutral sentiment at 0.00 reduces our overall confidence despite the attractive price."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "75%",
+          "reason": "The 24h volume of over $920k provides sufficient liquidity for clean execution on a $3.50 trade."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "50%",
+          "reason": "Volume is decent, but neutral sentiment lacks the clear positive backing needed to confirm institutional accumulation."
+        }
+      ],
+      "consensus_passed": true,
+      "consensus_score": "70%",
+      "approved_count": 7,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/avax-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 09:55:40 UTC",
+    "status": "EXECUTED",
+    "technical": {
+      "rsi": 41.97,
+      "volume_24h": "$106.8M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "ETH/USDT trading at $2,439.47. 24h change: -0.54% (H: $2,493.72 / L: $2,388.69). RSI(14): 41.97. 24h volume: $106,783,765."
+    },
+    "proposal": {
+      "action": "BUY",
+      "token": "ETH",
+      "amount_usd": 22.0,
+      "rationale": "ETH is consolidating near key support with a neutral RSI of 41.97, offering a favorable risk-reward entry for a moderate strategy."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "Trade amount is within the maximum limit and RSI of 41.97 is well below the buy limit of 70."
+      },
+      "momentum_trader": {
+        "status": "APPROVED",
+        "confidence": "70%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Trade amount is within the maximum limit and RSI of 41.97 is well below the buy limit of 70."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Consolidation near support with a neutral RSI provides a stable base for an upward continuation."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Market conditions are balanced and not overheated, making this a safe entry point."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "60%",
+          "reason": "Neutral sentiment and slight negative daily change mean the crowd is not overly euphoric."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "75%",
+          "reason": "The trade is backed by a reasonable risk-reward entry at key support rather than pure hype."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "RSI of 41.97 falls squarely in the 40-60 dead zone lacking a clear statistical edge."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Consolidation near key support presents a solid long-term accumulation opportunity for a moderate strategy."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "Sentiment sits at neutral 0.00, reducing my confidence in an immediate upside move."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Strong 24h volume of over $106 million ensures clean execution with minimal slippage."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "High volume combined with neutral sentiment lacks the definitive institutional accumulation signal required."
+        }
+      ],
+      "consensus_passed": true,
+      "consensus_score": "70%",
+      "approved_count": 7,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "4017423190222868480",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/eth-usdt"
+    }
+  },
+  {
+    "timestamp": "2026-10-17 09:53:10 UTC",
+    "status": "REJECTED",
+    "technical": {
+      "rsi": 40.65,
+      "volume_24h": "$106.5M",
+      "verdict": "NEUTRAL"
+    },
+    "sentiment": {
+      "score": 0.0,
+      "summary": "ETH/USDT trading at $2,437.85. 24h change: -0.59% (H: $2,493.72 / L: $2,388.69). RSI(14): 40.65. 24h volume: $106,481,845."
+    },
+    "proposal": {
+      "action": "BUY",
+      "token": "ETH",
+      "amount_usd": 22.0,
+      "rationale": "ETH is consolidating near support with an RSI of 40.65, presenting a favorable accumulation entry for a moderate risk strategy."
+    },
+    "council": {
+      "risk_officer": {
+        "status": "APPROVED",
+        "notes": "Trade amount of $22.00 is well within the $30.00 max limit and RSI of 40.65 is safely below the 70 BUY limit."
+      },
+      "momentum_trader": {
+        "status": "REJECTED",
+        "confidence": "40%"
+      },
+      "votes": [
+        {
+          "agent": "RiskOfficer",
+          "status": "APPROVED",
+          "confidence": "95%",
+          "reason": "Trade amount of $22.00 is well within the $30.00 max limit and RSI of 40.65 is safely below the 70 BUY limit."
+        },
+        {
+          "agent": "MomentumTrader",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "RSI is neutral at 40.65 and consolidation near support lacks the explosive momentum signal I typically look for."
+        },
+        {
+          "agent": "MacroAnalyst",
+          "status": "APPROVED",
+          "confidence": "80%",
+          "reason": "Accumulating ETH near support during a mild pullback fits well within a moderate risk macro strategy."
+        },
+        {
+          "agent": "ContrarianTrader",
+          "status": "APPROVED",
+          "confidence": "75%",
+          "reason": "Sentiment is completely neutral at 0.00 and price is near recent lows, avoiding crowd euphoria entirely."
+        },
+        {
+          "agent": "FundamentalsAnalyst",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "Buying ETH during consolidation based on support levels provides a reasonable structural rationale beyond pure sentiment."
+        },
+        {
+          "agent": "QuantAnalyst",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "RSI at 40.65 falls directly into the 40-60 neutral dead zone lacking a strong statistical edge."
+        },
+        {
+          "agent": "GrowthInvestor",
+          "status": "APPROVED",
+          "confidence": "70%",
+          "reason": "ETH is consolidating near support, presenting a sound long-term accumulation opportunity for a dip buyer."
+        },
+        {
+          "agent": "SentimentAnalyst",
+          "status": "REJECTED",
+          "confidence": "30%",
+          "reason": "Market sentiment is neutral at 0.00, reducing my confidence in an immediate upward move."
+        },
+        {
+          "agent": "LiquidityAnalyst",
+          "status": "APPROVED",
+          "confidence": "90%",
+          "reason": "Extremely high 24h volume of over $106 million ensures clean execution with minimal slippage risk."
+        },
+        {
+          "agent": "WhaleWatcher",
+          "status": "REJECTED",
+          "confidence": "40%",
+          "reason": "High volume combined with neutral sentiment does not provide clear confirmation of institutional accumulation."
+        }
+      ],
+      "consensus_passed": false,
+      "consensus_score": "60%",
+      "approved_count": 6,
+      "total_count": 10
+    },
+    "execution": {
+      "order_id": "\u2014",
+      "exchange": "OKX",
+      "mode": "Demo Trading",
+      "okx_url": "https://www.okx.com/trade-spot/eth-usdt"
+    }
+  },
+  {
     "timestamp": "2026-10-17 09:32:45 UTC",
     "status": "EXECUTED",
     "technical": {

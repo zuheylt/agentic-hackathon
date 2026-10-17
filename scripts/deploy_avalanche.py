@@ -1,5 +1,5 @@
 """
-Deploy ERC8004Registry to Avalanche Fuji testnet and register CouncilTrade as an on-chain AI agent.
+Deploy ERC8004Registry to Avalanche Fuji testnet and register PocketTrader as an on-chain AI agent.
 
 Usage:
     python scripts/deploy_avalanche.py
@@ -106,12 +106,12 @@ def deploy():
     print(f"  Contract deployed: {contract_address}")
     print(f"  Snowtrace: {EXPLORER}/address/{contract_address}")
 
-    print("\n── Registering CouncilTrade as ERC-8004 AI agent...")
+    print("\n── Registering PocketTrader as ERC-8004 AI agent...")
     contract  = w3.eth.contract(address=contract_address, abi=abi)
     agent_uri = json.dumps(AGENT_CARD)
 
     reg_tx = contract.functions.registerAgent(
-        "CouncilTrade AI Agent", agent_uri
+        "PocketTrader AI Agent", agent_uri
     ).build_transaction({
         "from":     account.address,
         "nonce":    w3.eth.get_transaction_count(account.address),

@@ -14,7 +14,7 @@ load_dotenv()
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="CouncilTrade",
+    page_title="PocketTrader",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -87,7 +87,7 @@ def run_async(coro):
 
 # ── Sidebar nav ───────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## ⚡ CouncilTrade")
+    st.markdown("## ⚡ PocketTrader")
     st.markdown('<span class="okx-badge">🔵 OKX Demo</span> '
                 '<span class="ok-badge">🤖 10 Agents</span>', unsafe_allow_html=True)
     st.divider()
@@ -106,7 +106,7 @@ with st.sidebar:
 # PAGE — DASHBOARD
 # ══════════════════════════════════════════════════════════════════════════════
 if page == "🏠 Dashboard":
-    st.title("⚡ CouncilTrade Dashboard")
+    st.title("⚡ PocketTrader Dashboard")
     st.caption("Run the AI council on any OKX token and see a full decision breakdown.")
 
     # ── Market Scanner ────────────────────────────────────────────────────────
@@ -553,7 +553,7 @@ elif page == "📜 History":
 # PAGE — ASSISTANT
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "🤖 Assistant":
-    st.title("🤖 CouncilBot — Your Crypto Guide")
+    st.title("🤖 PocketBot — Your Crypto Guide")
     st.caption("Ask anything about what the council did, why, or what crypto terms mean. "
                "This is an educational tool — not financial advice.")
 
@@ -588,7 +588,7 @@ elif page == "🤖 Assistant":
                 for h in history[:5]
             )
 
-        return f"""You are CouncilBot, a friendly and patient crypto education assistant inside CouncilTrade.
+        return f"""You are PocketBot, a friendly and patient crypto education assistant inside PocketTrader.
 Your job is to help people who are NEW to crypto understand what the AI trading council is doing and why.
 
 Current council configuration:
@@ -634,7 +634,7 @@ Your communication rules:
                 st.session_state.chat_history.append({"role": "user", "content": q})
                 st.rerun()
 
-    if prompt := st.chat_input("Ask CouncilBot anything…"):
+    if prompt := st.chat_input("Ask PocketBot anything…"):
         st.session_state.chat_history.append({"role": "user", "content": prompt})
         st.rerun()
 
@@ -642,7 +642,7 @@ Your communication rules:
     if (st.session_state.chat_history
             and st.session_state.chat_history[-1]["role"] == "user"):
         with st.chat_message("assistant"):
-            with st.spinner("CouncilBot is thinking…"):
+            with st.spinner("PocketBot is thinking…"):
                 try:
                     contents = [
                         _types.Content(
@@ -663,6 +663,6 @@ Your communication rules:
                     st.markdown(answer)
                     st.session_state.chat_history.append({"role": "model", "content": answer})
                 except Exception as e:
-                    err = f"CouncilBot error: {e}"
+                    err = f"PocketBot error: {e}"
                     st.error(err)
                     st.session_state.chat_history.append({"role": "model", "content": err})

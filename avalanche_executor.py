@@ -1,5 +1,5 @@
 """
-Records approved CouncilTrade decisions on Avalanche C-Chain via ERC-8004.
+Records approved PocketTrader decisions on Avalanche C-Chain via ERC-8004.
 Called after every successful trade execution — creates an immutable audit trail.
 """
 

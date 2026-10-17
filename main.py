@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CouncilTrade CLI entrypoint."""
+"""PocketTrader CLI entrypoint."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ MOCK_PATH = Path("data/mock_scenarios.json")
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="CouncilTrade — autonomous multi-agent trading council"
+        description="PocketTrader — autonomous multi-agent trading council"
     )
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument(
@@ -82,7 +82,7 @@ async def main() -> None:
             await run_pipeline(scenario)
 
     else:
-        logger.section("CouncilTrade")
+        logger.section("PocketTrader")
         print("  Usage:")
         print("    python main.py --live ETH-USDT      # live OKX data + ATK execution")
         print("    python main.py --mock               # mock scenario 0")

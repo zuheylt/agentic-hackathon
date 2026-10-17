@@ -1,15 +1,101 @@
 {
-    "proposal": {
-        "action": "BUY",
-        "token": "AVAX",
-        "amount_usd": 3.5,
-        "rationale": "Bullish trend confirmed on Avalanche C-Chain."
+  "timestamp": "2026-10-17 10:27:00 UTC",
+  "status": "EXECUTED",
+  "technical": {
+    "rsi": 60.05,
+    "volume_24h": "$122.6M",
+    "verdict": "NEUTRAL"
+  },
+  "sentiment": {
+    "score": 0.0,
+    "summary": "SOL/USDT trading at $104.76. 24h change: -1.13% (H: $107.42 / L: $102.52). RSI(14): 60.05. 24h volume: $122,568,147."
+  },
+  "proposal": {
+    "action": "BUY",
+    "token": "SOL",
+    "amount_usd": 22.0,
+    "rationale": "RSI at 60.05 indicates healthy upward momentum without being overbought, supporting a moderate long entry on SOL."
+  },
+  "council": {
+    "risk_officer": {
+      "status": "APPROVED",
+      "notes": "Trade amount of $22.00 is within our $30.00 limit and RSI of 60.05 is safely below the 70 buy threshold."
     },
-    "execution": {
-        "tx_hash": "0x317f147c83b27316025185ed279e5abab50812b49a247ebe60ce00587a9ac3a0",
-        "snowtrace_url": "https://snowtrace.io/tx/0x317f147c83b27316025185ed279e5abab50812b49a247ebe60ce00587a9ac3a0",
-        "execution_timestamp": "2026-10-17 12:07:02",
-        "block_finality": "1.2s (Simulated)",
-        "gas_fee": "0.0012 AVAX"
-    }
+    "momentum_trader": {
+      "status": "APPROVED",
+      "confidence": "80%"
+    },
+    "votes": [
+      {
+        "agent": "RiskOfficer",
+        "status": "APPROVED",
+        "confidence": "90%",
+        "reason": "Trade amount of $22.00 is within our $30.00 limit and RSI of 60.05 is safely below the 70 buy threshold."
+      },
+      {
+        "agent": "MomentumTrader",
+        "status": "APPROVED",
+        "confidence": "80%",
+        "reason": "An RSI of 60.05 combined with strong volume confirms a healthy upward momentum without hitting overbought levels."
+      },
+      {
+        "agent": "MacroAnalyst",
+        "status": "APPROVED",
+        "confidence": "75%",
+        "reason": "The market is not overheated at this RSI level, making it a reasonable entry point within the broader trend."
+      },
+      {
+        "agent": "ContrarianTrader",
+        "status": "APPROVED",
+        "confidence": "70%",
+        "reason": "Sentiment is neutral at 0.00 and RSI is moderate, meaning the crowd isn't overly euphoric yet."
+      },
+      {
+        "agent": "FundamentalsAnalyst",
+        "status": "APPROVED",
+        "confidence": "70%",
+        "reason": "The setup is supported by healthy volume and reasonable technicals rather than pure blind hype."
+      },
+      {
+        "agent": "QuantAnalyst",
+        "status": "REJECTED",
+        "confidence": "40%",
+        "reason": "At 60.05, the RSI sits in the 40-60 dead zone lacking a strong statistical edge."
+      },
+      {
+        "agent": "GrowthInvestor",
+        "status": "APPROVED",
+        "confidence": "70%",
+        "reason": "Healthy momentum and solid utility make this a reasonable dip entry for the long term."
+      },
+      {
+        "agent": "SentimentAnalyst",
+        "status": "REJECTED",
+        "confidence": "30%",
+        "reason": "Neutral sentiment at 0.00 reduces confidence in an immediate upward catalyst."
+      },
+      {
+        "agent": "LiquidityAnalyst",
+        "status": "APPROVED",
+        "confidence": "90%",
+        "reason": "The robust 24h volume ensures clean execution with minimal slippage risk."
+      },
+      {
+        "agent": "WhaleWatcher",
+        "status": "REJECTED",
+        "confidence": "40%",
+        "reason": "High volume combined with flat neutral sentiment does not indicate clear institutional accumulation."
+      }
+    ],
+    "consensus_passed": true,
+    "consensus_score": "70%",
+    "approved_count": 7,
+    "total_count": 10
+  },
+  "execution": {
+    "order_id": "4017486288896036864",
+    "exchange": "OKX",
+    "mode": "Demo Trading",
+    "okx_url": "https://www.okx.com/trade-spot/sol-usdt"
+  }
 }

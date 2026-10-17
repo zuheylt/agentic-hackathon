@@ -1,4 +1,4 @@
-"""Orchestrates the full CouncilTrade pipeline for a single market scenario."""
+"""Orchestrates the full PocketTrader pipeline for a single market scenario."""
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ async def run_pipeline(
     settings: dict | None = None,
     auto_execute: bool = False,
 ) -> FinalDecision:
-    logger.section(f"CouncilTrade — {raw_scenario.get('name', raw_scenario['token'])}")
+    logger.section(f"PocketTrader — {raw_scenario.get('name', raw_scenario['token'])}")
 
     signal   = await gather_signals(raw_scenario)
     proposal = await run_strategist(signal, settings=settings)

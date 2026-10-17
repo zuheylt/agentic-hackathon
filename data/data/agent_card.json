@@ -1,11 +1,11 @@
 {
   "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
-  "name": "CouncilTrade AI Agent",
+  "name": "PocketTrader AI Agent",
   "description": "Multi-agent AI Council decision execution module on Avalanche C-Chain",
   "services": [
     {
       "name": "A2A",
-      "endpoint": "https://api.counciltrade.ai/v1/agent"
+      "endpoint": "https://api.pockettrader.ai/v1/agent"
     }
   ],
   "active": true,

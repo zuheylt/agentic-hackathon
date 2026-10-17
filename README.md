@@ -1,4 +1,4 @@
-# CouncilTrade
+# PocketTrader
 
 Autonomous multi-agent trading council — signals, strategy, and consensus voting powered by Claude.
 
