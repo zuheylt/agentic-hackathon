@@ -110,12 +110,16 @@ def deploy():
     contract  = w3.eth.contract(address=contract_address, abi=abi)
     agent_uri = json.dumps(AGENT_CARD)
 
+    gas_est = contract.functions.registerAgent(
+        "PocketTrader AI Agent", agent_uri
+    ).estimate_gas({"from": account.address})
+
     reg_tx = contract.functions.registerAgent(
         "PocketTrader AI Agent", agent_uri
     ).build_transaction({
         "from":     account.address,
         "nonce":    w3.eth.get_transaction_count(account.address),
-        "gas":      300_000,
+        "gas":      gas_est + 50_000,
         "gasPrice": w3.eth.gas_price,
         "chainId":  FUJI_CHAIN,
     })
